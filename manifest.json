@@ -1,0 +1,7 @@
+{
+  "name": "firestore",
+  "short_name": "firestore",
+  "description": "test of firestore features",
+  "start_url": "/",
+  "display": "standalone"
+}
