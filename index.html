@@ -15,6 +15,26 @@
     <link rel="import" href="/src/firestore-app/firestore-app.html">
   </head>
   <body>
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase-app.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.2/firebase-firestore.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAvROEikcqtMEhQ9f7O4h4gOCoAfvfe0E0",
+    authDomain: "firestoreio.firebaseapp.com",
+    databaseURL: "https://firestoreio.firebaseio.com",
+    projectId: "firestoreio",
+    storageBucket: "",
+    messagingSenderId: "31394158520"
+  };
+  firebase.initializeApp(config);
+  var firestore = firebase.firestore();
+  
+</script>
     <firestore-app></firestore-app>
   </body>
 </html>
