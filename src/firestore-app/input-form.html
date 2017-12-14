@@ -1,0 +1,68 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="input-form">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+    </style>
+     
+     <iron-form id="form5">
+        <form is="iron-form" method="post" action="/form/handler">
+          <div class="card">
+            <p>my-view</p>
+    
+            <paper-input id="first" name="first" label="first"></paper-input>
+            <paper-input id="last" name="last" label="last"></paper-input>
+            <paper-input id="born" name="born" label="born"></paper-input>
+            <div>
+              <paper-button icon="my-icons:menu" on-tap="write">Add</paper-button>
+            </div>     
+          </div>
+        </form>
+     </iron-form>
+ 
+  </template>
+
+  <script>
+    class InputForm extends Polymer.Element {
+      static get is() { return 'input-form'; }
+      ready() {
+        super.ready();
+        console.log("Super Ready Input Form");
+      }
+      
+      write() {
+        console.log("Writing to Database");
+        const formObj = this.$.form5;
+        var formData = formObj.serializeForm();
+        formData.created = firebase.firestore.FieldValue.serverTimestamp();
+        firestore.collection("users").add({formData})
+        .then(function(docRef) {
+            console.log(`Document written with ID: ${docRef.id}`);
+        })
+        .catch(function(error) {
+            console.log(`Error adding document ${error}`);
+        })
+      }
+    }
+
+    window.customElements.define(InputForm.is, InputForm);
+  </script>
+</dom-module>
