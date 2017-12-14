@@ -50,10 +50,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       
       write() {
         console.log("Writing to Database");
-        const formObj = this.$.form5;
-        var formData = formObj.serializeForm();
-        formData.created = firebase.firestore.FieldValue.serverTimestamp();
-        firestore.collection("users").add({formData})
+        firestore.collection("users").add({
+          first: this.$.first.value,
+          last: this.$.last.value,
+          born: this.$.born.value,
+          created: firebase.firestore.FieldValue.serverTimestamp()
+        })
         .then(function(docRef) {
             console.log(`Document written with ID: ${docRef.id}`);
         })
